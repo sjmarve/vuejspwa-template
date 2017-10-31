@@ -29,10 +29,10 @@
     <div class="hero-body">
       <div class="container has-text-centered">
         <p class="title">
-          School Vault
+          Vodacom
         </p>
         <p class="subtitle">
-          Student reporting solution for high schools in South Africa.
+          Agent Solutions
         </p>
       </div>
     </div>
