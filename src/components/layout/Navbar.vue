@@ -5,8 +5,8 @@
           <a @click="toggleSidebar({opened: !sidebar.opened})" class="navbar-item is-hidden-tablet" v-show="!sidebar.hidden">
             <i class="fa fa-bars" aria-hidden="true"></i>
           </a>
-          <a class="navbar-item" href="/#/">
-            School Vault
+          <a class="navbar-item" href="/#/" title="Sales Channel Partners">
+            Vodacom SCP
           </a>
         </div>
 

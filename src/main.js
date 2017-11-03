@@ -13,22 +13,24 @@ import { TOGGLE_SIDEBAR } from './store/mutation-types';
 
 Vue.router = router;
 Vue.use(VueAxios, axios);
-Vue.axios.defaults.baseURL = 'https://schoolback.dev/api';
+Vue.axios.defaults.baseURL = process.env.apiUrl;
 Vue.use(VueAuth, {
   auth: {
     request: function (req, token) {
-      //this.options.http._setHeaders.call(this, req, {Authorization: 'Bearer ' + token})
+      this.options.http._setHeaders.call(this, req, { Authorization: 'Bearer ' + token })
     },
     response: function (res) {
       // Get Token from response body
-      //return res.data
-      return '';
+      return res.data.access_token
     }
   },
   http: require('@websanova/vue-auth/drivers/http/axios.1.x.js'),
   router: require('@websanova/vue-auth/drivers/router/vue-router.2.x.js'),
-  loginData: { url: 'https://schoolback.dev/api/login', fetchUser: true },
-  refreshData: { enabled: false }
+  loginData: { url: 'api/auth/login', fetchUser: true },
+  fetchData: { url: 'api/auth/user' },
+  refreshData: { enabled: false },
+  logoutData: { url: 'api/auth/logout', method: 'POST', redirect: '/', makeRequest: true },
+  //refreshData: { url: 'api/auth/refresh', method: 'GET', enabled: true, interval: 30 },
 });
 
 Vue.use(NProgress);

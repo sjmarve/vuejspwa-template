@@ -1,16 +1,21 @@
 <template>
-<div class="content has-text-centered hero is-large is-info">
+<div class="content has-text-centered hero is-large is-danger">
   <div class="hero-body" style="padding-top: 5rem">
   <h1 class="is-title is-bold">Login</h1>
 
   <div class="columns is-vcentered">
     <div class="column is-6 is-offset-3">
       <div class="box">
-        <div v-show="error" style="color:red; word-wrap:break-word;">{{ error }}</div>
+        <div v-if="error" style="color:red; word-wrap:break-word;" class="has-text-left">
+          {{ error.message }}
+          <ul class="error-messages">
+            <li v-for="fault in validationErrors">{{ fault }}</li>
+          </ul>
+        </div>
         <form v-on:submit.prevent="login">
-          <label class="label">Email</label>
+          <label class="label">Username</label>
           <p class="control">
-            <input v-model="data.body.email" class="input" type="email" placeholder="email@example.org">
+            <input v-model="data.body.username" class="input" type="text" placeholder="email@example.org or 0790123456">
           </p>
           <label class="label">Password</label>
           <p class="control">
@@ -26,7 +31,7 @@
 
           <hr>
           <p class="control has-text-centered">
-            <button type="submit" class="button is-primary"><i class="fa fa-unlock"></i>&nbsp;Sign In</button>
+            <button type="submit" class="button is-danger"><i class="fa fa-unlock"></i>&nbsp;Sign In</button>
             <router-link class="button is-default" to="/">Cancel</router-link>
 
           </p>
@@ -48,7 +53,7 @@ export default {
     return {
       data: {
         body: {
-          email: null,
+          username: null,
           password: null
         },
         rememberMe: false
@@ -61,6 +66,18 @@ export default {
       console.log('Redirect from: ' + this.$auth.redirect().from.name)
     }
     // Can set query parameter here for auth redirect or just do it silently in login redirect.
+  },
+  computed: {
+    validationErrors() {
+      if(this.error.errors){
+        return  Object.entries(this.error.errors).reduce(
+          (errors, value) => {
+            const catName = value.shift().toUpperCase();
+            return errors.concat(value.shift().map(msg => `${catName}: ${msg}`));
+          }
+        , []);
+      }
+    }
   },
   methods: {
     login () {
@@ -84,12 +101,12 @@ export default {
             // console.log(err.response.status)
             // console.log(err.response.data)
             // console.log(err.response.headers)
-            this.error = err.response.data
+            this.error = err.response.data;
           } else {
             // Something happened in setting up the request that triggered an Error
             console.log('Error', err.message)
           }
-          console.log(err.config)
+          //console.log(err.config)
         }
       })
     }
@@ -105,6 +122,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.error-messages {
+    font-size: 0.5em;
+    margin-top: 0;
+}
+
 .is-title {
     text-transform: capitalize;
 }

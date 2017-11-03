@@ -1,6 +1,5 @@
 <template>
-
-  <section class="hero is-info is-large">
+  <section class="hero is-danger is-large">
     <div class="hero-head">
       <nav class="navbar">
         <div class="container">
@@ -28,16 +27,15 @@
 
     <div class="hero-body">
       <div class="container has-text-centered">
+        <img src="../assets/logo.png" alt="Vodacom Logo">
         <p class="title">
           Vodacom
         </p>
         <p class="subtitle">
-          Agent Solutions
+          Sales Channel Partners Backend
         </p>
       </div>
     </div>
-
-
   </section>
 </template>
 

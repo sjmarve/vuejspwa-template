@@ -4,19 +4,22 @@ import menuModule from '../store/modules/menu'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'hash', // Demo is living in GitHub.io, so required!
+  mode: 'history', // Demo is living in GitHub.io, so required!
   linkActiveClass: 'is-active',
   scrollBehavior: () => ({ y: 0 }),
   routes: [
     {
       name: 'Home',
       path: '/',
-      component: () => import('../views/Home')
+      component: () => import('../views/Landing.vue'),
     },
     {
       name: 'Login',
       path: '/login',
-      component: () => import('../views/auth/Login')
+      component: () => import('../views/auth/Login'),
+      meta: {
+        auth: false
+      }
     },
     ...generateRoutesFromMenu(menuModule.state.items),
     {

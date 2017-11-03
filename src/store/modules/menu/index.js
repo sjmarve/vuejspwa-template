@@ -7,20 +7,68 @@ const state = {
       name: 'Dashboard',
       path: '/dashboard',
       meta: {
-        icon: 'fa-tachometer',
-        link: 'dashboard/index.vue'
+        auth: true,
+        icon: 'fa-tachometer'
       },
       component: lazyLoading('dashboard', true)
     },
     {
-      name: 'Axios',
-      path: '/axiosDemo',
+      path: '/products',
+      meta: {
+        expanded: false,
+        auth: true,
+        icon: 'fa-product-hunt',
+        label: 'Products'
+      },
+      component: lazyLoading('products', true),
+      children: [
+        {
+          name: 'Products',
+          path: '',
+          component: lazyLoading('products/list', false),
+        },
+        {
+          name: 'Add New: Product',
+          path: 'add-new',
+          component: lazyLoading('products/new', false),
+        },
+      ]
+    },
+    {
+      name: 'Sales Channel',
+      path: '/channels',
       meta: {
         auth: true,
-        icon: 'fa-rocket',
-        link: 'axios/index.vue'
+        icon: 'fa-th-large'
       },
-      component: lazyLoading('axios', true)
+      component: lazyLoading('channels', true)
+    },
+    {
+      name: 'SC Agents',
+      path: '/agents',
+      meta: {
+        auth: true,
+        icon: 'fa-th'
+      },
+      component: lazyLoading('agents', true)
+    },
+    {
+      name: 'Admin Users',
+      path: '/admin-users',
+      meta: {
+        auth: true,
+        icon: 'fa-users'
+      },
+      component: lazyLoading('admin-users', true)
+    },
+    {
+      name: 'FAQ Management',
+      path: '/faq-management',
+      meta: {
+        auth: true,
+        icon: 'fa-info'
+      },
+      component: lazyLoading('misc/faq-management', false)
     }
   ]
 }

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nprogress-container></nprogress-container>
-    <navbar v-if="$auth.check()"></navbar>
+    <navbar :show="$auth.check()" v-if="$auth.check()"></navbar>
     <sidebar :show="sidebar.opened && !sidebar.hidden" v-if="$auth.check()"></sidebar>
     <app-main></app-main>
     <footer-bar></footer-bar>

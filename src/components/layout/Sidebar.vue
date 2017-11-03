@@ -97,7 +97,9 @@ export default {
       if ('expanded' in parent.meta && !isParent) {
         this.expandMenu({
           item: parent,
-          expanded: true
+          //expanded: true,
+          //only expand if not root component
+          expanded: (parent.path + '/') !== lastMatched.path,
         })
       }
     },
